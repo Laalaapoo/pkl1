@@ -1,28 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title> Edit Book </title>
-    @vite(['resources/css/app.scss', 'resources/js/app.js'])
-</head>
-<body>
-<div class="container vh-100 center-box">
-    <h1 > Edit Book </h1>
-<form action="{{ route('books.update', $book->id) }}" method="POST"> 
-    @csrf
-    @method('PUT')
-<table class="table table-bordered table-stripped">
-    <tr>
-        <th> Title </th>
-        <th> Author </th>
-        <th> Description </th>
-    </tr>
-    <tr>
-        <td> <input class="form-control" type="text" name="title" value="{{ $book->title }}"> </td>
-        <td> <input class="form-control"  type="text" name="author" value="{{ $book->author }}"> </td>      
-        <td> <textarea class="form-control" style="height : 40px"name="description">{{ $book->description }}</textarea> </td>
-</table>
-<div class="d-flex justify-content-center gap-2">
-<a class="btn btn-primary mt-3 ms-3" href="{{ route('books.index') }}" style="color: white; text-decoration: none;"> Back </a>   
-<button type ="submit" class="btn btn-primary mt-3 ms-3">Save</button>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Book</title>
 
-</form>
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-4">
+
+<div class="container">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">✏️ Edit Book</h3>
+            <a href="{{ route('books.index') }}" class="btn btn-light btn-sm">← Back to List</a>
+        </div>
+
+        <div class="card-body">
+            <form action="{{ route('books.update', $book->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-3">
+                    <label for="title" class="form-label fw-semibold">Title</label>
+                    <input type="text" name="title" id="title" class="form-control" 
+                           value="{{ old('title', $book->title) }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="author" class="form-label fw-semibold">Author</label>
+                    <input type="text" name="author" id="author" class="form-control" 
+                           value="{{ old('author', $book->author) }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-semibold">Description</label>
+                    <textarea name="description" id="description" class="form-control" rows="4" required>{{ old('description', $book->description) }}</textarea>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success px-4">💾 Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- Bootstrap JS --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
