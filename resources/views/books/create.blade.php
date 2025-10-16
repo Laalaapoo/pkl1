@@ -1,28 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title> Create Book </title>
-    @vite(['resources/css/app.scss', 'resources/js/app.js'])
-</head>
-<body>
-<div class="container vh-100 center-box">
-<h1>Add New Book</h1> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Book</title>
 
-<form action="{{ route('books.store') }}" method="POST"> 
-    @csrf
-<table class="table table-bordered table-stripped">
-    <tr>
-        <th> Title </th>
-        <th> Author </th>
-        <th> Description </th>
-    </tr>
-    <tr>
-        <td> <input class="form-control" type="text" name="title"> </td>
-        <td> <input class="form-control"  type="text" name="author"> </td>
-        <td> <textarea class="form-control" style="height : 40px"name="description"></textarea> </td>
-</table>
-<div class="d-flex justify-content-center gap-2">
-<a class="btn btn-primary mt-3 ms-3" href="{{ route('books.index') }}" style="color: white; text-decoration: none;"> Back </a>   
-<button type ="submit" class="btn btn-primary mt-3 ms-3 ">Save</button>
-</form>
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-4">
+
+<div class="container">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">📘 Add New Book</h3>
+            <a href="{{ route('books.index') }}" class="btn btn-light btn-sm">← Back to List</a>
+        </div>
+
+        <div class="card-body">
+            <form action="{{ route('books.store') }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="title" class="form-label fw-semibold">Title</label>
+                    <input type="text" name="title" id="title" class="form-control" placeholder="Masukkan judul buku" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="author" class="form-label fw-semibold">Author</label>
+                    <input type="text" name="author" id="author" class="form-control" placeholder="Masukkan nama penulis" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-semibold">Description</label>
+                    <textarea name="description" id="description" class="form-control" rows="4" placeholder="Tuliskan deskripsi buku..." required></textarea>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success px-4">💾 Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{-- Bootstrap JS --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+</html>
